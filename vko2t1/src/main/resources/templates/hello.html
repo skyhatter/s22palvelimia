@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Server Programming with Spring Boot</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:if="${age} &gt; 17"><p th:text= "'Welcome ' + ${name} + '!'" /> </div>
+	<div th:if="${age} &lt; 18">You are too young</div>
+</body>
+</html>
