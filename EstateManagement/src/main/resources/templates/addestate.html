@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+    <title>Kiinteistöt</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää kiinteistö</h1>
+	<div>
+	<form th:object="${addEstate}" th:action="@{saveEstate}" action="#" method="post">
+		<table class="table table-striped">
+			<tr>
+				<td>Kiinteistö: <input type="text" th:field="*{building}" /></td>
+				<td th:if="${#fields.hasErrors('building')}" th:errors="*{building}">Error</td>
+			</tr>
+			<tr>
+				<td>Osoite: <input type="text" th:field="*{address}" /></td>
+			</tr>
+			<tr>
+				<td>Rakennus vuosi: <input type="text" th:field="*{buildyear}" /></td>
+				<td th:if="${#fields.hasErrors('buildyear')}" th:errors="*{buildyear}">Error</td>
+			</tr>
+			<tr>
+				<td>Isännöitsijä: 
+					<select id="managements" th:field="*{management}">
+						<option th:each="management: ${managements}" 
+						th:value="${management.management_id}" th:text="${management.managementName}">
+						</option>
+					</select>
+				</td>	
+			</tr>	
+		</table>
+		<input type="submit" class="btn btn-success" value="Save"></input>
+	</form>
+	</div>
+</body>
+</html>

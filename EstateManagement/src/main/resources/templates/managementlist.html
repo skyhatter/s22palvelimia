@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+    <title>Isännöitsijät</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Isännöitsijät</h1><h3><a href="/estatelist">Kiinteistöt</a></h3>
+    <table class="table table-striped">
+		<tr>
+		    <th>Isännöitsijä</th>
+		    <th>Sähköposti</th>
+		    <th><a sec:authorize="hasAuthority('ADMIN')" href="/addManagement">Uusi Isännöitsijä</a></th>
+		    <th><a href="/logout"><i>Kirjaudu ulos</i></a></th>
+		</tr>
+		
+		<tr th:each = "management : ${managements}">
+    		<td th:text="${management.managementName}"></td>
+    		<td th:text="${management.email}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editManagement/{id}(id=${management.management_id})}">Muokkaa</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteManagement/{id}(id=${management.management_id})}" class="btn btn-danger">Delete</a></td> 
+ 		</tr>
+ 		
+     </table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+    <title>Kiinteistöt</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Kiinteistöt</h1><h3><a href="/managementlist">Isännöitsijät</a></h3>
+    <table class="table table-striped">
+		<tr>
+		    <th>Kiinteistö</th>
+		    <th>Osoite</th>
+		    <th>Rakennus vuosi</th>
+		    <th>Isännöinti palvelu</th>
+		    <th><a sec:authorize="hasAuthority('ADMIN')" href="/addEstate">Lisää kiinteistö</a> </th>
+		    <th><a href="/logout"><i>Kirjaudu ulos</i></a></th>
+		</tr>
+		
+		<tr th:each = "estate : ${estates}">
+    		<td th:text="${estate.building}"></td>
+    		<td th:text="${estate.address}"></td>
+    		<td th:text="${estate.buildyear}"></td>
+    		<td th:text="${estate.management.managementName}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editEstate/{id}(id=${estate.estate_id})}">Muokkaa</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteEstate/{id}(id=${estate.estate_id})}" class="btn btn-danger">Delete</a></td> 
+ 		</tr>	
+     </table>	
+     
+</body>
+</html>
